@@ -120,7 +120,7 @@ bash experiments/runner3.sh   # Attack 3 ablation
 The main results of the paper are organized as follows:
 
 - **Attack 1 — Link Inference:** Predicts whether a head vertex is involoved in a target relation using topological features from the public graph.
-- **Attack 2 — Triple Inference:** Given a confirmed target head entity, infers the most likely tail entity for the target relation.
+- **Attack 2 — Triple Inference:** Given a confirmed target head vertex, infers the most likely tail vertex for the target relation.
 - **Attack 3 — Link Prediction via Structural Propagation:** Predicts sensitive triples by propagating labels from a seed set using k-nearest neighbor similarity over structural feature vectors.
 
 Each attack is associated with:
