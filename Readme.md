@@ -1,4 +1,4 @@
-# Exposed by Design: Privacy Attacks and Defenses for Knowledge Graphs
+# Exposed by Design: Topology-based privacy attacks and mitigations for Knowledge Graphs
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.7%2B-blue)](https://www.python.org/downloads/)
@@ -84,27 +84,9 @@ To reproduce the results of the paper, follow these steps:
 2. Run the undefended attack experiments:
 
 ```bash
-python attacks/attack1_head.py \
-  --public-path ./nell_out/public.tsv \
-  --sens-path ./nell_out/concept:teamplaysagainstteam.tsv \
-  --outdir ./results/attack1/ \
-  --seed 42    # Attack 1
-python attack2_pairwise.py \
-  --public-path data/public.tsv \
-  --sens-path data/sensitive.tsv \
-  --attack1-head-scores results/attack1_heads_scores.tsv \
-  --attack1-tail-scores results/attack1_tails_scores.tsv \
-  --outdir results_attack2/   # Attack 2
-python attack3_knn_reconstruction.py \
-  --public_tsv data/public.tsv \
-  --sensitive_dir data/sensitive \
-  --sensitive_files has_age_category.tsv \
-  --outdir results_attack3 \
-  --seed_frac 0.2 \
-  --knn_k 120 \
-  --max_pred_per_head 3 \
-  --vote_threshold 0.0 \
-  --hash_dim_out 256 \    # Attack 3
+bash attacks/runner_attack1.sh       # Attack 1
+bash attacks/runner_attack2.sh       # Attack 2
+bash attacks/runner_attack3.sh       # Attack 3
 ```
 
 3. Apply the defense mechanisms:

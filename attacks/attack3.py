@@ -427,7 +427,7 @@ def main():
     ap.add_argument("--seed", type=int, default=42)
 
     # prediction policy
-    ap.add_argument("--max_pred_per_head", type=int, default=1)
+    ap.add_argument("--max_pred_per_head", type=int, default=3)
     ap.add_argument("--vote_threshold", type=float, default=0.0)
     ap.add_argument("--skip_one_to_one", action="store_true")
 
