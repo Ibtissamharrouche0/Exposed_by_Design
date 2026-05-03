@@ -4,7 +4,7 @@
 [![Python](https://img.shields.io/badge/python-3.7%2B-blue)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/pytorch-2.4.1-red)](https://pytorch.org/)
 
-This repository contains the code and resources to reproduce the main results of the paper **"Exposed by Design: Privacy Attacks and Defenses for Knowledge Graphs"**.
+This repository contains the code and resources to reproduce the main results of the paper **"Exposed by Design: Topology-based privacy attacks and mitigations for Knowledge Graphs"**.
 
 ---
 
