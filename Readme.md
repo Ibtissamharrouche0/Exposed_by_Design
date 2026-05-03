@@ -126,7 +126,7 @@ The main results of the paper are organized as follows:
 Each attack is associated with:
 
 1. An implementation script in the `attacks/` directory.
-2. A batch runner in the `experiments/` directory.
+2. A batch runner in the `attacks/` directory.
 3. A feature ablation script in the `experiments/` directory.
 
 ---
