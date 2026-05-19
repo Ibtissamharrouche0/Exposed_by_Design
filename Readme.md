@@ -179,6 +179,9 @@ python experiments/utility_LinkPrediction.py \
 │   ├── attack1_tail.py
 │   ├── attack2.py
 │   └── attack3.py
+│   ├── runner_attack1.sh
+│   ├── runner_attack2.sh
+│   └── runner_attack3.sh
 │
 ├── defenses/                           # Defense mechanisms
 │   ├── defense_kanonymity.py
