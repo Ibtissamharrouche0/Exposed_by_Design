@@ -31,11 +31,13 @@ python validate_data.py --all
 **NELL-995:**
 - Attack 1 (Link Inference): `concept:teamplaysagainstteam`
 - Attack 3 (Graph Reconstruction): `concept:atlocation`, `concept:proxyfor`, `concept:subpartof`, `concept:teamplaysagainstteam`
-- Utility (Link Prediction): `concept:athleteplayssport`
+- Utility (Link Prediction): `concept:athleteplayssport`  
+
 **FB15k-237:**
 - Attack 1: `/sports/sports_position/players./sports/sports_team_roster/team`
 - Attack 3: `/education/educational_institution/students_graduates./education/education/student`, `/film/film/genre`, `/people/person/profession`, `/sports/sports_position/players./sports/sports_team_roster/team`
-- Utility: `/people/person/nationality`
+- Utility: `/people/person/nationality`   
+
 **HealthKG:**
 - Attack 1: `has_taxonomy`
 - Attack 3: `has_age_category`, `has_age_living_apart`, `has_family_ID`, `has_gender`, `has_is_westernized`, `has_is-from`, `has_zygosity`
