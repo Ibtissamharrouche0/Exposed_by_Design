@@ -182,7 +182,7 @@ Measure how defenses impact link prediction performance:
 python experiments/utility_LinkPrediction.py \
   --baseline-graph data/processed/NELL/global_kg_public_wo_sensitive.tsv \
   --defended-graph results/defenses/kanon/defended_graph.tsv \
-  --target-relation "concept:athleteplayssport" \
+  --target-relation "Target_Relation" \          #Check data/readme.md
   --output results/utility_tradeoff.json
 
 ```
