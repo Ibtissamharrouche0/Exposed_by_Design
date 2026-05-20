@@ -175,6 +175,7 @@ Measure how defenses impact link prediction performance:
 3. **Baseline**: Train TransE on 80% of public graph → Test on fixed 20%
 4. **Defended**: Train TransE on 80% of defended graph → Test on same fixed 20%
 5. Compare Hits@10 and MRR to measure utility degradation
+
 **Key insight:** Same test set for both models, only the training graph changes (public vs defended).
  
 ```bash
