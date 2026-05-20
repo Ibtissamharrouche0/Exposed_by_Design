@@ -185,7 +185,7 @@ python experiments/utility_LinkPrediction.py \
   --target-relation "concept:athleteplayssport" \
   --output results/utility_tradeoff.json
 
-```b
+```
 ---
 
 ## License
