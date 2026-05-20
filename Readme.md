@@ -48,165 +48,141 @@ We have also tested the code on a smaller CPU-only setup:
 ---
 
 ## Data Preparation
-
-Download the datasets from the following sources:
-
-- **NELL**: https://rtw.ml.cmu.edu/rtw/
-- **FB15k-237**: https://huggingface.co/datasets/KGraph/FB15k-237
-- **HealthKG**: https://github.com/Boreico/KGE_QCB_Project
-
-Once downloaded, split each dataset into public and sensitive subgraphs using the provided utility:
-
-```bash
-python dataprocessing/split.py \
-  --global_path /path/to/full_kg.tsv \
-  --relation "sensitive_relation_1" \
-  --relation "sensitive_relation_2" \
-  --outdir /path/to/output/
-```
-
-Refer to `dataprocessing/README.md` for the full list of sensitive relations used per dataset and expected directory structure.
+ 
+We use three knowledge graphs: **NELL-995** (154K triples), **FB15k-237** (310K triples), and **HealthKG** (6M triples).
+ 
+**See [data/README.md](data/README.md) for:**
+- Download and preprocessing instructions
+- Dataset statistics and characteristics
+- Target relations for each attack
+- Complete workflow examples
 
 ---
 
-## Reproducing Results
-
-To reproduce the results of the paper, follow these steps:
-
-1. Prepare the data as described above.
-2. Navigate to the `attacks/` directory and run the appropriate script for each attack.
-3. To apply defenses, run the corresponding scripts in the `defenses/` directory.
-4. After execution, results are saved in the `results/` directory.
-
-### Recommended Workflow
-
-1. Prepare the datasets using `dataprocessing/split.py`.
-2. Run the undefended attack experiments:
-
+## Attacks
+ 
+### Attack 1: Link Inference
+Predicts if a vertex is involved in a sensitive relation using public graph topology.
+ 
 ```bash
-bash attacks/runner_attack1.sh       # Attack 1
-bash attacks/runner_attack2.sh       # Attack 2
-bash attacks/runner_attack3.sh       # Attack 3
+python attacks/attack1_head.py \
+  --public-path data/processed/NELL/global_kg_public_wo_sensitive.tsv \
+  --sens-path data/processed/NELL/sensitive/concept__teamplaysagainstteam.tsv \
+  --outdir results/attack1/
 ```
-
-3. Apply the defense mechanisms:
-
+ 
+### Attack 2: Triple Inference
+Infers the most likely tail vertex for a confirmed head in a sensitive relation.
+ 
 ```bash
-bash defenses/kanon_runner.sh       # K-Anonymity
-bash defenses/rr_runner.sh          # Randomized Response
-bash defenses/chameleon_runner.sh   # CHAMELEON
+python attacks/attack2.py \
+  --public-path data/processed/NELL/global_kg_public_wo_sensitive.tsv \
+  --sens-path data/processed/NELL/sensitive/concept__teamplaysagainstteam.tsv \
+  --outdir results/attack2/
 ```
-
-4. Evaluate the privacy-utility trade-off:
-
+ 
+### Attack 3: Graph Reconstruction
+Reconstructs sensitive subgraphs by propagating labels from seed nodes.
+ 
 ```bash
-python experiments/utility_LinkPrediction.py \
-  --public-path ./prepared_data/public.tsv \
-  --defended-path ./results/defended_graph.tsv
+python attacks/attack3.py \
+  --public-path data/processed/NELL/global_kg_public_wo_sensitive.tsv \
+  --sens-dir data/processed/NELL/sensitive/ \
+  --outdir results/attack3/
 ```
+ 
+**Batch execution:**
+```bash
+bash attacks/runner_attack1.sh
+bash attacks/runner_attack2.sh
+bash attacks/runner_attack3.sh
+```
+ 
+## Defenses
+ 
+Three privacy-preserving mechanisms to protect against topology-based attacks.
+ 
+### K-Anonymity
+Groups entities with similar structural properties to prevent re-identification.
+ 
+```bash
+python defenses/defense_kanonymity.py \
+  --public-path data/processed/NELL/global_kg_public_wo_sensitive.tsv \
+  --k 10 \
+  --outdir results/defenses/kanon/
+```
+ 
+**Parameters:**
+- `--k`: Anonymity parameter (higher = more privacy, lower utility)
+### Randomized Response
+Adds controlled noise to graph structure using differential privacy.
+ 
+```bash
+python defenses/defense_randomized_response.py \
+  --public-path data/processed/NELL/global_kg_public_wo_sensitive.tsv \
+  --epsilon 1.0 \
+  --outdir results/defenses/rr/
+```
+ 
+**Parameters:**
+- `--epsilon`: Privacy budget (lower = more privacy, more noise)
+### CHAMELEON
+Adaptive defense that modifies graph structure to confuse attackers while preserving utility.
+ 
+```bash
+python defenses/chameleon_defense.py \
+  --public-path data/processed/NELL/global_kg_public_wo_sensitive.tsv \
+  --budget 0.1 \
+  --outdir results/defenses/chameleon/
+```
+ 
+**Parameters:**
+- `--budget`: Modification budget (fraction of edges to modify)
 
-5. Run the feature ablation studies:
-
+**Batch execution:**
+```bash
+bash defenses/kanon_runner.sh
+bash defenses/rr_runner.sh
+bash defenses/chameleon_runner.sh
+```
+ 
+## Experiments
+ 
+### Feature Ablation Studies
+ 
+Evaluate the contribution of different topological features:
+ 
 ```bash
 bash experiments/runner1.sh   # Attack 1 ablation
 bash experiments/runner2.sh   # Attack 2 ablation
 bash experiments/runner3.sh   # Attack 3 ablation
 ```
-
----
-
-## Experiments
-
-The main results of the paper are organized as follows:
-
-- **Attack 1 — Link Inference:** Predicts whether a head vertex is involoved in a target relation using topological features from the public graph.
-- **Attack 2 — Triple Inference:** Given a confirmed target head vertex, infers the most likely tail vertex for the target relation.
-- **Attack 3 — Link Prediction via Structural Propagation:** Predicts sensitive triples by propagating labels from a seed set using k-nearest neighbor similarity over structural feature vectors.
-
-Each attack is associated with:
-
-1. An implementation script in the `attacks/` directory.
-2. A batch runner in the `attacks/` directory.
-3. A feature ablation script in the `experiments/` directory.
-
----
-
-## Minimal Working Example: Reproduce Attack 1 on NELL
-
-Follow these steps to quickly reproduce the Attack 1 results on the NELL dataset.
-
-1. Prepare the data:
-
+ 
+Or run individually:
 ```bash
-python dataprocessing/split.py \
-  --global_path nell_sample.tsv \
-  --relation concept:teamplaysagainstteam \
-  --outdir ./nell_out/
+python experiments/attack1_featuresstudy.py \
+  --public-path data/processed/NELL/global_kg_public_wo_sensitive.tsv \
+  --sens-path data/processed/NELL/sensitive/concept__teamplaysagainstteam.tsv
 ```
-
-2. Run Attack 1 (approximately 5–10 minutes):
-
-```bash
-python attacks/attack1_head.py \
-  --public-path ./nell_out/public.tsv \
-  --sens-path ./nell_out/concept:teamplaysagainstteam.tsv \
-  --outdir ./results/attack1/ \
-  --seed 42
-```
-
-3. Apply the K-Anonymity defense:
-
-```bash
-bash defenses/kanon_runner.sh
-```
-
-4. Evaluate utility:
-
+ 
+### Privacy-Utility Trade-off
+ 
+Measure how defenses impact link prediction performance:
+ 
+**Evaluation Setup:**
+1. Split public graph randomly: 80% train, 20% test
+2. Extract the 20% test set (same triples used for both evaluations)
+3. **Baseline**: Train TransE on 80% of public graph → Test on fixed 20%
+4. **Defended**: Train TransE on 80% of defended graph → Test on same fixed 20%
+5. Compare Hits@10 and MRR to measure utility degradation
+**Key insight:** Same test set for both models, only the training graph changes (public vs defended).
+ 
 ```bash
 python experiments/utility_LinkPrediction.py \
-  --public-path ./nell_out/public.tsv \
-  --defended-path ./results/defended.tsv
-```
-
----
-
-## Directory Structure
-
-```
-.
-├── attacks/                            # Attack implementations
-│   ├── attack1_head.py
-│   ├── attack1_tail.py
-│   ├── attack2.py
-│   └── attack3.py
-│   ├── runner_attack1.sh
-│   ├── runner_attack2.sh
-│   └── runner_attack3.sh
-│
-├── defenses/                           # Defense mechanisms
-│   ├── defense_kanonymity.py
-│   ├── defense_randomized_response.py
-│   ├── chameleon_defense.py
-│   ├── kanon_runner.sh
-│   ├── rr_runner.sh
-│   └── chameleon_runner.sh
-│
-├── dataprocessing/
-│   ├── split.py
-│   └── README.md
-│
-├── experiments/                        # Ablation studies and evaluation
-│   ├── attack1_featuresstudy.py
-│   ├── attack2_featuresstudy.py
-│   ├── attack3_featuresstudy.py
-│   ├── utility_LinkPrediction.py
-│   ├── runner1.sh
-│   ├── runner2.sh
-│   └── runner3.sh
-│
-├── requirements.txt
-└── README.md
-```
+  --baseline-graph data/processed/NELL/global_kg_public_wo_sensitive.tsv \
+  --defended-graph results/defenses/kanon/defended_graph.tsv \
+  --target-relation "concept:athleteplayssport" \
+  --output results/utility_tradeoff.json
 
 ---
 
@@ -219,3 +195,6 @@ This project is released under the [MIT License](LICENSE).
 ## Contact
 
 For questions or issues related to this repository, please open a GitHub issue or contact the authors directly.
+
+**Note:** Before running batch scripts (`runner_*.sh`), adapt the dataset paths in the scripts to match your directory structure.
+ 
