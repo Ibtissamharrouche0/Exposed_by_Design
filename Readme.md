@@ -51,7 +51,7 @@ We have also tested the code on a smaller CPU-only setup:
  
 We use three knowledge graphs: **NELL-995** (154K triples), **FB15k-237** (310K triples), and **HealthKG** (6M triples).
  
-**See [data/README.md](data/README.md) for:**
+**See [data/readme.md](data/readme.md) for:**
 - Download and preprocessing instructions
 - Dataset statistics and characteristics
 - Target relations for each attack
