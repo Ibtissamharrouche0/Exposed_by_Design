@@ -79,9 +79,41 @@ All files are tab-separated: `head \t relation \t tail`
  
 1. Run scripts above
 2. Use `split.py` for your experiments:
+
 ```bash
-python ../scripts/split.py --global_path raw/NELL/full_kg.tsv --relation "concept:teamplaysagainstteam" --outdir public/NELL/
+python ../scripts/split.py \
+  --global_path raw/NELL/full_kg.tsv \
+  --relation "concept:teamplaysagainstteam" \
+  --outdir public/NELL/
 ```
+ 
+**What it does:**
+- Reads the full knowledge graph
+- Separates triples by relation:
+  - **Sensitive**: Relations you specify → saved in `sensitive/` directory
+  - **Public**: Everything else → `global_kg_public_wo_sensitive.tsv`
+**Output structure:**
+```
+public/NELL/
+├── global_kg_public_wo_sensitive.tsv    # All triples except sensitive ones
+├── sensitive/
+│   └── concept__teamplaysagainstteam.tsv  # Only this relation
+└── split_report_multi.txt               # Statistics report
+```
+ 
+**Multiple relations (for Attack 3):**
+```bash
+python ../scripts/split.py \
+  --global_path raw/NELL/full_kg.tsv \
+  --relation "concept:atlocation" \
+  --relation "concept:proxyfor" \
+  --relation "concept:subpartof" \
+  --outdir public/NELL/
+```
+ 
+This creates separate files for each relation in `sensitive/`.
+ 
+
  
 ## Troubleshooting
  
