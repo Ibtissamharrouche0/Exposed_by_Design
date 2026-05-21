@@ -464,9 +464,9 @@ def main():
     except Exception:
         roc_auc = None
 
-    print(f"\n✅ PR-AUC  = {pr_auc:.4f}")
+    print(f"\n PR-AUC  = {pr_auc:.4f}")
     if roc_auc:
-        print(f"✅ ROC-AUC = {roc_auc:.4f}")
+        print(f" ROC-AUC = {roc_auc:.4f}")
 
     # ── Save ─────────────────────────────────────────────────────
     pd.DataFrame({"head_id": heads_test, "label": y_test, "score": y_scores}) \
