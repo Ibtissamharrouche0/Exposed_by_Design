@@ -16,12 +16,6 @@ Usage:
     python defense_randomized_response.py --input <path> --output <path> --epsilon 0.5
     python defense_randomized_response.py --input <path> --output <path> --epsilon 2.0
 
-Epsilon guide:
-    epsilon = 0.1  → very strong privacy, low utility
-    epsilon = 0.5  → strong privacy
-    epsilon = 1.0  → balanced (recommended start)
-    epsilon = 2.0  → moderate privacy
-    epsilon = 5.0  → weak privacy, high utility
 """
 
 import argparse
