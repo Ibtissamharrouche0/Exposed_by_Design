@@ -399,7 +399,7 @@ def main():
     with open(outdir / f"{exp_name}_metrics.json", "w") as f:
         json.dump(metrics, f, indent=2)
 
-    print(f"✅ Done | ni_head + Ri (undirected) L{args.max_hop} | {device}")
+    print(f" Done | ni_head + Ri (undirected) L{args.max_hop} | {device}")
 
 
 if __name__ == "__main__":

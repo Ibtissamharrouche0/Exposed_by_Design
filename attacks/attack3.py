@@ -403,9 +403,6 @@ def main():
     ap.add_argument("--sensitive_files", required=True,
                     help="Comma list: has_abundance.tsv,has_body_site.tsv,...")
 
-    # ✅ THREAT MODEL: head_prefix is now OPTIONAL.
-    # If empty or not provided, ALL nodes from the public graph are used as candidates.
-    # This reflects a realistic adversary who only observes G_pub.
     ap.add_argument("--head_prefix", default="",
                     help="Optional prefix filter on candidate heads (e.g. 'Person_'). "
                          "If empty, ALL nodes from the public graph are used (recommended).")
