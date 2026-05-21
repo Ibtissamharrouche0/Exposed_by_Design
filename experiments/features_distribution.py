@@ -119,8 +119,8 @@ def create_combined_boxplots(all_data, outdir):
     plt.savefig(output_png, dpi=600, bbox_inches='tight', facecolor='white')
     plt.savefig(output_eps, format='eps', bbox_inches='tight')
     
-    print(f"  ✅ PNG: {output_png}")
-    print(f"  ✅ EPS: {output_eps}")
+    print(f"   PNG: {output_png}")
+    print(f"  EPS: {output_eps}")
     
     plt.close()
 
@@ -187,7 +187,7 @@ def create_combined_histograms(all_data, outdir):
         plt.savefig(output_png, dpi=300, bbox_inches='tight', facecolor='white')
         plt.savefig(output_eps, format='eps', bbox_inches='tight')
         
-        print(f"  ✅ {feat}: PNG + EPS")
+        print(f"   {feat}: PNG + EPS")
         
         plt.close()
 
@@ -242,7 +242,7 @@ def create_latex_template(outdir):
     with open(latex_path, 'w') as f:
         f.write(template)
     
-    print(f"  ✅ LaTeX template: {latex_path}")
+    print(f"   LaTeX template: {latex_path}")
 
 
 def main():
@@ -267,7 +267,7 @@ def main():
     create_latex_template(base_dir)
     
     print("\n" + "="*80)
-    print("✅ MIXED VISUALIZATIONS CREATED!")
+    print(" MIXED VISUALIZATIONS CREATED!")
     print("="*80)
     print("\nGenerated files (PNG + EPS):")
     print("  BOXPLOTS:")

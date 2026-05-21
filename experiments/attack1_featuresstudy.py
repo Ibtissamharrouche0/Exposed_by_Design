@@ -499,7 +499,7 @@ def main():
 
     print(f"[+] Scores  → {scores_path}")
     print(f"[+] Metrics → {metrics_path}")
-    print("✅ Done.")
+    print("Done.")
 
 
 if __name__ == "__main__":

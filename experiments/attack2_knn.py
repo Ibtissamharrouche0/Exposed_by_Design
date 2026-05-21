@@ -216,9 +216,9 @@ def main():
 
     mrr, hits_out, n_heads = compute_mrr(heads_test, tails_test, y_test, y_scores)
 
-    print(f"\n✅ MRR      = {mrr:.4f}")
+    print(f"\n MRR      = {mrr:.4f}")
     for k, v in hits_out.items():
-        print(f"✅ {k:8s} = {v:.4f}")
+        print(f" {k:8s} = {v:.4f}")
     print(f"   Heads evaluated: {n_heads}")
 
     outdir    = Path(args.outdir)
@@ -243,7 +243,7 @@ def main():
             "test_pairs":   int(len(y_test)),
         }, f, indent=2)
 
-    print(f"✅ Saved → {outdir}")
+    print(f" Saved → {outdir}")
 
 
 if __name__ == "__main__":

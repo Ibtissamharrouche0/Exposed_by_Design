@@ -499,10 +499,10 @@ def evaluate_utility(
     print(f"    Hits@10 ratio: {h10_ratio:.4f}")
     
     if mrr_ratio > 1.05:
-        print(f"\n  ⚠️  WARNING: Utility INCREASED by {(mrr_ratio-1)*100:.1f}%!")
+        print(f"\n    WARNING: Utility INCREASED by {(mrr_ratio-1)*100:.1f}%!")
         print(f"     This suggests the defense is removing noise/low-quality edges.")
     elif mrr_ratio < 0.95:
-        print(f"\n  ✅ Utility DECREASED by {(1-mrr_ratio)*100:.1f}% as expected.")
+        print(f"\n   Utility DECREASED by {(1-mrr_ratio)*100:.1f}% as expected.")
     else:
         print(f"\n  ≈  Utility roughly unchanged (±5%)")
     
@@ -557,7 +557,7 @@ def main():
     with open(args.output, "w") as f:
         json.dump(results, f, indent=2)
     
-    print(f"✅ Results saved to {args.output}")
+    print(f" Results saved to {args.output}")
 
 
 if __name__ == "__main__":

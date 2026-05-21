@@ -61,7 +61,7 @@ def is_running_in_notebook():
 def download_healthkg_repo():
     """Download HealthKG RDF files from GitHub"""
     print("\n" + "="*70)
-    print("📥 Downloading HealthKG from GitHub")
+    print(" Downloading HealthKG from GitHub")
     print("="*70)
     
     try:
@@ -71,36 +71,36 @@ def download_healthkg_repo():
         zip_path = "/tmp/healthkg_repo.zip"
         extract_path = "/tmp/healthkg_repo"
         
-        print(f"\n📥 Downloading repository...")
+        print(f"\n Downloading repository...")
         urllib.request.urlretrieve(repo_url, zip_path)
         print(f"   ✓ Downloaded")
         
-        print(f"\n📦 Extracting...")
+        print(f"\n Extracting...")
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(extract_path)
         
         repo_dir = os.path.join(extract_path, "KGE_QCB_Project-main", "Phase 5 - Entity Definition")
         
         if not os.path.exists(repo_dir):
-            print(f"❌ Phase 5 directory not found")
+            print(f" Phase 5 directory not found")
             return None
         
-        print(f"✅ Extracted to: {repo_dir}")
+        print(f" Extracted to: {repo_dir}")
         return repo_dir
         
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
         return None
 
 def load_all_rdf_files(input_dir):
     """Load ALL RDF zip files without any filtering"""
     print(f"\n" + "="*70)
-    print(f"📂 Loading All RDF Files (NO FILTERING)")
+    print(f" Loading All RDF Files (NO FILTERING)")
     print("="*70)
-    print(f"\n📁 Input directory: {input_dir}")
+    print(f"\n Input directory: {input_dir}")
     
     if not os.path.exists(input_dir):
-        print(f"❌ Directory not found: {input_dir}")
+        print(f" Directory not found: {input_dir}")
         return None
     
     g = Graph()
@@ -109,10 +109,10 @@ def load_all_rdf_files(input_dir):
     rdf_zips = [f for f in os.listdir(input_dir) if f.startswith('RDF') and f.endswith('.zip')]
     
     if not rdf_zips:
-        print(f"⚠️  No RDF*.zip files found in {input_dir}")
+        print(f"  No RDF*.zip files found in {input_dir}")
         return None
     
-    print(f"\n📑 Found {len(rdf_zips)} RDF zip files:")
+    print(f"\n Found {len(rdf_zips)} RDF zip files:")
     for zf in sorted(rdf_zips):
         print(f"   - {zf}")
     
@@ -122,7 +122,7 @@ def load_all_rdf_files(input_dir):
     
     for i, zip_name in enumerate(sorted(rdf_zips), 1):
         zip_path = os.path.join(input_dir, zip_name)
-        print(f"\n📦 [{i}/{len(rdf_zips)}] Processing {zip_name}...")
+        print(f"\n [{i}/{len(rdf_zips)}] Processing {zip_name}...")
         
         try:
             # Extract
@@ -146,13 +146,13 @@ def load_all_rdf_files(input_dir):
             print(f"   Found {len(rdf_files)} RDF files")
             
             if not rdf_files:
-                print(f"   ⚠️  No RDF files found. Contents:")
+                print(f"     No RDF files found. Contents:")
                 for item in extracted_items[:5]:
                     item_path = os.path.join(extract_dir, item)
                     if os.path.isdir(item_path):
-                        print(f"      📁 {item}/")
+                        print(f"       {item}/")
                     else:
-                        print(f"      📄 {item}")
+                        print(f"       {item}")
             
             # Load each RDF file
             for rdf_file in rdf_files:
@@ -170,16 +170,16 @@ def load_all_rdf_files(input_dir):
                     print(f"   ✓ Loaded: {file_name}")
                 except Exception as e:
                     file_name = os.path.basename(rdf_file)
-                    print(f"   ⚠️  Error loading {file_name}: {str(e)[:80]}")
+                    print(f"     Error loading {file_name}: {str(e)[:80]}")
         
         except Exception as e:
-            print(f"   ❌ Error processing {zip_name}: {e}")
+            print(f"    Error processing {zip_name}: {e}")
     
     # Cleanup
     if os.path.exists(temp_extract):
         shutil.rmtree(temp_extract)
     
-    print(f"\n✅ Loaded {len(g):,} RDF triples total")
+    print(f"\n Loaded {len(g):,} RDF triples total")
     return g
 
 def simplify_uri(uri):
@@ -209,11 +209,11 @@ def simplify_uri(uri):
 def convert_to_tsv(graph):
     """Convert RDF to TSV - KEEP EVERYTHING, NO FILTERING"""
     print(f"\n" + "="*70)
-    print(f"🔄 Converting to TSV (NO FILTERING)")
+    print(f" Converting to TSV (NO FILTERING)")
     print("="*70)
     
-    print(f"\n🔍 Processing {len(graph):,} RDF triples...")
-    print(f"   ⚠️  Keeping ALL triples (no meta-relation filtering)")
+    print(f"\n Processing {len(graph):,} RDF triples...")
+    print(f"     Keeping ALL triples (no meta-relation filtering)")
     
     triples = []
     relation_counts = Counter()
@@ -233,7 +233,7 @@ def convert_to_tsv(graph):
             triples.append((head, relation, tail))
             relation_counts[relation] += 1
     
-    print(f"\n✅ Converted {len(triples):,} triples")
+    print(f"\n Converted {len(triples):,} triples")
     print(f"   └─ Unique relations: {len(relation_counts):,}")
     
     return triples, relation_counts
@@ -241,7 +241,7 @@ def convert_to_tsv(graph):
 def anonymize_persons(triples):
     """Anonymize ONLY person entities, keep everything else as-is"""
     print(f"\n" + "="*70)
-    print(f"👤 Anonymizing Person Entities")
+    print(f" Person Entities")
     print("="*70)
     
     # Step 1: Identify person entities by semantic relations
@@ -265,7 +265,7 @@ def anonymize_persons(triples):
     print(f"   ✓ Created anonymization mapping")
     
    
-    print(f"\n📝 Sample anonymization (first 5):")
+    print(f"\n Sample anonymization (first 5):")
     for i, (original, anonymized) in enumerate(list(person_mapping.items())[:5]):
         orig_display = original[:40] + '...' if len(original) > 40 else original
         print(f"   {orig_display:45s} → {anonymized}")
@@ -273,7 +273,7 @@ def anonymize_persons(triples):
         print(f"   ... and {len(person_mapping) - 5:,} more")
     
     # Step 3: Apply anonymization (only to persons)
-    print(f"\n🔄 Applying anonymization to {len(triples):,} triples...")
+    print(f"\n Applying anonymization to {len(triples):,} triples...")
     anonymized_triples = []
     
     for i, (head, relation, tail) in enumerate(triples):
@@ -297,12 +297,12 @@ def anonymize_persons(triples):
 def export_to_tsv(triples, output_file, relation_counts):
     """Export to TSV"""
     print(f"\n" + "="*70)
-    print(f"💾 Exporting to TSV")
+    print(f" Exporting to TSV")
     print("="*70)
     
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
-    print(f"\n📝 Writing to: {output_file}")
+    print(f"\n Writing to: {output_file}")
     
     with open(output_file, 'w', encoding='utf-8') as f:
         for i, (head, relation, tail) in enumerate(triples):
@@ -310,10 +310,10 @@ def export_to_tsv(triples, output_file, relation_counts):
                 print(f"   Written {i+1:,} triples...")
             f.write(f"{head}\t{relation}\t{tail}\n")
     
-    print(f"✅ Exported {len(triples):,} triples")
+    print(f" Exported {len(triples):,} triples")
     
     
-    print(f"\n🔝 Top 15 relations:")
+    print(f"\n Top 15 relations:")
     for i, (relation, count) in enumerate(relation_counts.most_common(15), 1):
         rel_display = relation[:45] + '...' if len(relation) > 45 else relation
         print(f"   {i:2d}. {rel_display:47s} : {count:>8,} triples")
@@ -321,14 +321,14 @@ def export_to_tsv(triples, output_file, relation_counts):
 def validate_output(output_file):
     """Validate output"""
     print(f"\n" + "="*70)
-    print(f"🔍 Validating Output")
+    print(f" Validating Output")
     print("="*70)
     
     if not os.path.exists(output_file):
-        print(f"❌ Output file not found: {output_file}")
+        print(f" Output file not found: {output_file}")
         return False
     
-    print(f"\n📄 Checking: {output_file}")
+    print(f"\n Checking: {output_file}")
     
     entities = set()
     relations = Counter()
@@ -354,15 +354,15 @@ def validate_output(output_file):
     
     person_entities = len([e for e in entities if e.startswith('Person_')])
     
-    print(f"\n✅ Validation passed!")
-    print(f"\n📊 Final statistics:")
+    print(f"\n Validation passed!")
+    print(f"\n Final statistics:")
     print(f"   ├─ Total triples: {line_count:,}")
     print(f"   ├─ Unique entities: {len(entities):,}")
     print(f"   ├─ Unique relations: {len(relations):,}")
     print(f"   └─ Person entities: {person_entities:,} (anonymized)")
     
    
-    print(f"\n📝 Sample triples (with anonymized persons):")
+    print(f"\n Sample triples (with anonymized persons):")
     with open(output_file, 'r', encoding='utf-8') as f:
         count = 0
         for line in f:
@@ -448,13 +448,13 @@ All triples kept, only persons are anonymized.
     # Step 2: Load RDF
     graph = load_all_rdf_files(input_dir)
     if not graph or len(graph) == 0:
-        print("\n❌ No RDF data loaded")
+        print("\n No RDF data loaded")
         return 1
     
     # Step 3: Convert (no filtering)
     triples, relation_counts = convert_to_tsv(graph)
     if not triples:
-        print("\n❌ No triples to export")
+        print("\n No triples to export")
         return 1
     
     # Step 4: Anonymize persons only
@@ -469,16 +469,16 @@ All triples kept, only persons are anonymized.
     # Summary
     print("\n" + "="*70)
     if valid:
-        print("✅ HEALTHKG EXTRACTION COMPLETE!")
+        print(" HEALTHKG EXTRACTION COMPLETE!")
     else:
-        print("⚠️  COMPLETED WITH WARNINGS")
+        print("  COMPLETED WITH WARNINGS")
     print("="*70)
     
-    print(f"\n📁 Output: {os.path.abspath(args.output)}")
-    print(f"📊 Triples: {len(anonymized_triples):,}")
-    print(f"👤 Persons anonymized: {len(person_mapping):,}")
+    print(f"\n Output: {os.path.abspath(args.output)}")
+    print(f" Triples: {len(anonymized_triples):,}")
+    print(f" Persons anonymized: {len(person_mapping):,}")
     
-    print("\n📝 Next steps:")
+    print("\n Next steps:")
     print(f"   python scripts/split.py --global_path {args.output} ...")
     print()
     

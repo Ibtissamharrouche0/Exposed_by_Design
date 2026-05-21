@@ -339,7 +339,7 @@ def run_experiment(exp_name, feature_config, df_triples, neighbors,
     hits_5 = metrics['hits']['hits@5']
     hits_10 = metrics['hits']['hits@10']
     
-    print(f"\n✅ MRR = {mrr:.4f} | H@1 = {hits_1:.4f} | H@3 = {hits_3:.4f} | H@5 = {hits_5:.4f} | H@10 = {hits_10:.4f}")
+    print(f"\n MRR = {mrr:.4f} | H@1 = {hits_1:.4f} | H@3 = {hits_3:.4f} | H@5 = {hits_5:.4f} | H@10 = {hits_10:.4f}")
     
     exp_dir = outdir / exp_name
     exp_dir.mkdir(parents=True, exist_ok=True)
@@ -437,7 +437,7 @@ def main():
               f"H@3: {row['hits@3']:.4f} | H@5: {row['hits@5']:.4f} | H@10: {row['hits@10']:.4f}")
     
     df_results.to_csv(outdir / "summary_ablation.tsv", sep="\t", index=False)
-    print(f"\n✅ Summary: {outdir / 'summary_ablation.tsv'}")
+    print(f"\n Summary: {outdir / 'summary_ablation.tsv'}")
 
 
 if __name__ == "__main__":

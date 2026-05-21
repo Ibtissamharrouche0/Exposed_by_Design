@@ -15,13 +15,13 @@ def merge_dataset(dataset_name, data_dir='./raw'):
     """Merge train/valid/test files into full_kg.tsv"""
     
     print(f"\n{'='*70}")
-    print(f"📦 Merging {dataset_name}")
+    print(f" Merging {dataset_name}")
     print('='*70)
     
     dataset_path = os.path.join(data_dir, dataset_name)
     
     if not os.path.exists(dataset_path):
-        print(f"❌ Dataset directory not found: {dataset_path}")
+        print(f" Dataset directory not found: {dataset_path}")
         return False
     
     # Files to merge
@@ -43,11 +43,11 @@ def merge_dataset(dataset_name, data_dir='./raw'):
             missing_files.append(filename)
     
     if missing_files:
-        print(f"❌ Missing files: {', '.join(missing_files)}")
+        print(f" Missing files: {', '.join(missing_files)}")
         return False
     
     # Merge files and remove duplicates
-    print("\n📥 Reading files...")
+    print("\n Reading files...")
     all_triples = set()  # Use set to automatically remove duplicates
     file_stats = {}
     
@@ -70,11 +70,11 @@ def merge_dataset(dataset_name, data_dir='./raw'):
     
     duplicates = sum(file_stats.values()) - len(all_triples)
     if duplicates > 0:
-        print(f"  ⚠️  Removed {duplicates:,} duplicate triples")
+        print(f"    Removed {duplicates:,} duplicate triples")
     
     # For NELL, clean the URIs
     if dataset_name == 'NELL':
-        print("\n🧹 Cleaning NELL URIs...")
+        print("\n Cleaning NELL URIs...")
         print("   Removing http://nell.ml.cmu.edu/ prefixes...")
         cleaned_triples = set()
         invalid_count = 0
@@ -114,17 +114,17 @@ def merge_dataset(dataset_name, data_dir='./raw'):
         print(f"  └─ Final count: {len(all_triples):,} clean triples")
     
     # Write merged file
-    print(f"\n💾 Writing to {output_file}...")
+    print(f"\n Writing to {output_file}...")
     with open(output_file, 'w', encoding='utf-8') as f:
         for triple in sorted(all_triples):  # Sort for consistency
             f.write(triple + '\n')
     
-    print(f"✅ Merged successfully!")
+    print(f" Merged successfully!")
     print(f"   Output: {output_file}")
     print(f"   Total triples: {len(all_triples):,}")
     
     # Verify the output
-    print("\n🔍 Verifying output...")
+    print("\n Verifying output...")
     with open(output_file, 'r', encoding='utf-8') as f:
         first_line = f.readline().strip()
         parts = first_line.split('\t')
@@ -142,9 +142,9 @@ def merge_dataset(dataset_name, data_dir='./raw'):
                 if 'http://' not in first_line and 'nell.ml.cmu.edu' not in first_line:
                     print(f"   ✓ NELL URIs successfully cleaned")
                 else:
-                    print(f"   ⚠️  Warning: Some URIs may remain")
+                    print(f"     Warning: Some URIs may remain")
         else:
-            print(f"   ⚠️  Warning: Expected 3 columns, found {len(parts)}")
+            print(f"     Warning: Expected 3 columns, found {len(parts)}")
     
     return True
 
@@ -155,11 +155,11 @@ def analyze_statistics(dataset_name, data_dir='./raw'):
     full_kg_path = os.path.join(dataset_path, 'full_kg.tsv')
     
     if not os.path.exists(full_kg_path):
-        print(f"⚠️  {full_kg_path} not found. Run merge first.")
+        print(f"  {full_kg_path} not found. Run merge first.")
         return
     
     print(f"\n{'='*70}")
-    print(f"📊 Statistics for {dataset_name}")
+    print(f" Statistics for {dataset_name}")
     print('='*70)
     
     entities = set()
@@ -174,12 +174,12 @@ def analyze_statistics(dataset_name, data_dir='./raw'):
                 entities.add(tail)
                 relations[relation] += 1
     
-    print(f"\n📈 Overview:")
+    print(f"\n Overview:")
     print(f"  ├─ Total triples: {sum(relations.values()):,}")
     print(f"  ├─ Unique entities: {len(entities):,}")
     print(f"  └─ Unique relations: {len(relations):,}")
     
-    print(f"\n🔝 Top 10 most frequent relations:")
+    print(f"\n Top 10 most frequent relations:")
     sorted_relations = sorted(relations.items(), key=lambda x: x[1], reverse=True)
     for i, (relation, count) in enumerate(sorted_relations[:10], 1):
         # Truncate long relation names
@@ -195,7 +195,7 @@ def cleanup_original_files(dataset_name, data_dir='./raw'):
     dataset_path = os.path.join(data_dir, dataset_name)
     files_to_remove = ['train.txt', 'valid.txt', 'test.txt']
     
-    print(f"\n🗑️  Cleanup original split files?")
+    print(f"\n  Cleanup original split files?")
     print(f"   This will remove: {', '.join(files_to_remove)}")
     print(f"   You can regenerate them with your own split.py script")
     
@@ -207,7 +207,7 @@ def cleanup_original_files(dataset_name, data_dir='./raw'):
             if os.path.exists(filepath):
                 os.remove(filepath)
                 print(f"  ✓ Removed {filename}")
-        print("✅ Cleanup complete")
+        print(" Cleanup complete")
     else:
         print("  Keeping original files")
 
@@ -310,7 +310,7 @@ Workflow:
     
     # Summary
     print("\n" + "="*70)
-    print("📊 MERGE SUMMARY")
+    print(" MERGE SUMMARY")
     print("="*70)
     
     for dataset, success in results.items():
@@ -318,9 +318,9 @@ Workflow:
         print(f"{status} {dataset}")
     
     success_count = sum(1 for v in results.values() if v)
-    print(f"\n✅ {success_count}/{len(results)} datasets merged successfully")
+    print(f"\n {success_count}/{len(results)} datasets merged successfully")
     
-    print("\n📝 Next steps:")
+    print("\n Next steps:")
     print("   1. Use scripts/split.py to create your custom train/test splits")
     print("   2. Example:")
     print("      python scripts/split.py \\")

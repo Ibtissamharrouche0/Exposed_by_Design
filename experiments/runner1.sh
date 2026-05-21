@@ -51,7 +51,7 @@ if [ ! -f "$PUBLIC_NELL" ]; then
 fi
 
 if [ ! -f "$SENS_NELL" ]; then
-    echo "❌ Sensitive file not found: $SENS_NELL"
+    echo " Sensitive file not found: $SENS_NELL"
     exit 1
 fi
 
@@ -86,12 +86,12 @@ PUBLIC_FB="data/processed/FB15k-237/global_kg_public_wo_sensitive.tsv"
 SENS_FB="data/processed/FB15k-237/sensitive/sports__sports_position__players.__sports__sports_team_roster__team.tsv"
 
 if [ ! -f "$PUBLIC_FB" ]; then
-    echo "❌ Public graph not found: $PUBLIC_FB"
+    echo " Public graph not found: $PUBLIC_FB"
     exit 1
 fi
 
 if [ ! -f "$SENS_FB" ]; then
-    echo "❌ Sensitive file not found: $SENS_FB"
+    echo " Sensitive file not found: $SENS_FB"
     exit 1
 fi
 
@@ -126,12 +126,12 @@ PUBLIC_HKG="data/processed/HealthKG/global_kg_public_wo_sensitive.tsv"
 SENS_HKG="data/processed/HealthKG/sensitive/has_taxonomy.tsv"
 
 if [ ! -f "$PUBLIC_HKG" ]; then
-    echo "❌ Public graph not found: $PUBLIC_HKG"
+    echo " Public graph not found: $PUBLIC_HKG"
     exit 1
 fi
 
 if [ ! -f "$SENS_HKG" ]; then
-    echo "❌ Sensitive file not found: $SENS_HKG"
+    echo " Sensitive file not found: $SENS_HKG"
     exit 1
 fi
 
@@ -159,7 +159,7 @@ done
 
 echo ""
 echo "════════════════════════════════════════════════════════════"
-echo "  ✅ ABLATION STUDY COMPLETE"
+echo "   ABLATION STUDY COMPLETE"
 echo "════════════════════════════════════════════════════════════"
 echo ""
 echo "Results saved to: $OUTDIR"

@@ -705,7 +705,7 @@ def main():
     with open(config_json, "w") as f:
         json.dump(meta, f, indent=2)
 
-    print(f"\n✅ Done: {exp_name}")
+    print(f"\n Done: {exp_name}")
     print(f"  PR-AUC: {pr_auc_global:.4f}")
     print(f"  Files: {metrics_csv}")
 

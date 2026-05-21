@@ -24,7 +24,7 @@ class DownloadProgressBar:
                 self.last_percent = percent
 
 def download_file(url, output_path, desc="Downloading"):
-    print(f"📥 {desc}")
+    print(f" {desc}")
     
     if TQDM_AVAILABLE:
         response = urllib.request.urlopen(url)
@@ -48,7 +48,7 @@ def download_file(url, output_path, desc="Downloading"):
 
 def download_nell(data_dir):
     print("\n" + "="*70)
-    print("📦 Downloading NELL-995 Dataset")
+    print(" Downloading NELL-995 Dataset")
     print("="*70)
     
     nell_dir = os.path.join(data_dir, 'NELL')
@@ -62,7 +62,7 @@ def download_nell(data_dir):
     try:
         from datasets import load_dataset
         
-        print("📥 Loading from HuggingFace (CleverThis/nell-995)...")
+        print(" Loading from HuggingFace (CleverThis/nell-995)...")
         dataset = load_dataset("CleverThis/nell-995")
         
         data = dataset["data"]
@@ -80,22 +80,22 @@ def download_nell(data_dir):
             with open(path, 'w', encoding='utf-8') as f:
                 for h, r, t in data:
                     f.write(f"{h}\t{r}\t{t}\n")
-            print(f"💾 Saved {len(data):,} triples to {filename}")
+            print(f" Saved {len(data):,} triples to {filename}")
         
-        print("✅ NELL-995 downloaded successfully!")
+        print(" NELL-995 downloaded successfully!")
         return True
         
     except ImportError:
-        print("❌ 'datasets' library required")
+        print(" 'datasets' library required")
         print("   Install: pip install datasets")
         return False
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
         return False
 
 def download_fb15k237(data_dir):
     print("\n" + "="*70)
-    print("📦 Downloading FB15k-237 Dataset")
+    print(" Downloading FB15k-237 Dataset")
     print("="*70)
     
     fb_dir = os.path.join(data_dir, 'FB15k-237')
@@ -112,7 +112,7 @@ def download_fb15k237(data_dir):
     try:
         download_file(url, zip_path, "Downloading FB15k-237")
         
-        print("📦 Extracting...")
+        print(" Extracting...")
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(data_dir)
         
@@ -125,7 +125,7 @@ def download_fb15k237(data_dir):
             shutil.rmtree(release_dir)
         
         os.remove(zip_path)
-        print("✅ FB15k-237 downloaded successfully!")
+        print(" FB15k-237 downloaded successfully!")
         return True
     except Exception as e:
         print(f"❌ Error: {e}")
@@ -182,9 +182,9 @@ def main():
         results['FB15k-237'] = download_fb15k237(args.data_dir)
     
     print("\n" + "="*70)
-    print(f"✅ {sum(results.values())}/{len(results)} datasets downloaded")
+    print(f" {sum(results.values())}/{len(results)} datasets downloaded")
     print("="*70)
-    print("\n📝 For HealthKG: See data/README.md\n")
+    print("\n For HealthKG: See data/README.md\n")
 
 if __name__ == '__main__':
     main()

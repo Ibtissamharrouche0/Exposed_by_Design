@@ -154,9 +154,9 @@ def main():
     except:
         roc_auc = None
 
-    print(f"\n✅ PR-AUC  = {pr_auc:.4f}")
+    print(f"\n PR-AUC  = {pr_auc:.4f}")
     if roc_auc:
-        print(f"✅ ROC-AUC = {roc_auc:.4f}")
+        print(f" ROC-AUC = {roc_auc:.4f}")
 
     outdir    = Path(args.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
@@ -180,7 +180,7 @@ def main():
             "test_neg":     len(test_neg),
         }, f, indent=2)
 
-    print(f"✅ Saved → {outdir}")
+    print(f" Saved → {outdir}")
 
 
 if __name__ == "__main__":
