@@ -24,13 +24,6 @@ def load_features(dataset_name, base_dir):
     if csv_path.exists():
         print(f"[+] Loading {dataset_name} from {csv_path}")
         df = pd.read_csv(csv_path)
-        
-        # Features:
-        # n1_h = OUT-degree (HEAD)
-        # R1_h = Relation diversity (HEAD)
-        # b1 = Breadth edges (UNDIRECTED) - already in CSV
-        # d1 = Depth edges (UNDIRECTED) - already in CSV
-        
         return df
     else:
         print(f"  ⚠️  Not found: {csv_path}")
