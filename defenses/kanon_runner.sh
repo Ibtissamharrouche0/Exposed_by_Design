@@ -1,17 +1,4 @@
-#!/bin/bash
-# ─────────────────────────────────────────────────────────────────
-# runner_kanonymity_defense.sh
-# Runs defense_kanonymity.py for all 3 datasets x all k values
-#
-# k values : 5, 10, 15, 20, 25
-# Datasets  : NELL, FB15k, HealthKG
-#
-# Output files per dataset (named automatically):
-#   kg_kanon_k5.tsv
-#   kg_kanon_k10.tsv
-#   ...
-#   kg_kanon_k25.tsv
-# ─────────────────────────────────────────────────────────────────
+
 
 # ── PATHS — edit these before running ────────────────────────────
 

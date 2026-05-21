@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """
 ABLATION STUDY - Attack1
 Features available:

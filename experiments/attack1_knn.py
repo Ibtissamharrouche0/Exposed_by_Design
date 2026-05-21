@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """
 Attack 1 - kNN head scorer
 2 features: out_deg + Ri_L1

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """
 Attack 2 - kNN ONLY
 Features: ni_head_L1, ni_tail_L1, Ii_head_L1, Ii_tail_L1, Ei_head_L1, Ei_tail_L1

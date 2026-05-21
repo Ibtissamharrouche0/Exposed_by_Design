@@ -1,25 +1,4 @@
-#!/bin/bash
-# ─────────────────────────────────────────────────────────────────
-# runner_randomized_response.sh
-# Runs defense_randomized_response.py for all 3 datasets x all epsilon values
-#
-# Epsilon values : 0.1, 0.5, 1.0, 2.0, 5.0
-# Datasets       : NELL, FB15k, HealthKG
-#
-# Epsilon guide:
-#   0.1  → very strong privacy, low utility
-#   0.5  → strong privacy
-#   1.0  → balanced (recommended)
-#   2.0  → moderate privacy
-#   5.0  → weak privacy, high utility
-#
-# Output files per dataset:
-#   kg_rr_eps0.1.tsv
-#   kg_rr_eps0.5.tsv
-#   kg_rr_eps1.0.tsv
-#   kg_rr_eps2.0.tsv
-#   kg_rr_eps5.0.tsv
-# ─────────────────────────────────────────────────────────────────
+
 
 # ── PATHS — edit these before running ────────────────────────────
 

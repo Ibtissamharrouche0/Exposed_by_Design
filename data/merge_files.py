@@ -1,9 +1,5 @@
-#!/usr/bin/env python3
-"""
-Merge Knowledge Graph Files
-Merges train.txt, valid.txt, and test.txt into a single full_kg.tsv file.
-For NELL: Automatically cleans URIs to extract clean identifiers.
 
+"""
 Usage:
     python merge_files.py --dataset NELL
     python merge_iles.py --dataset FB15k-237

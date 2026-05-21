@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import argparse, json, math, random, hashlib
 from pathlib import Path
 from collections import defaultdict, Counter

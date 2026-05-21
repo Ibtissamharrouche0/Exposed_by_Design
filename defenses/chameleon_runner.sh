@@ -1,15 +1,4 @@
-#!/bin/bash
-# ─────────────────────────────────────────────────────────────────
-# runner_chameleon_defense.sh
-# Runs chameleon_defense.py for all 3 datasets
-# Budgets : 0.05 0.10 0.20 0.30 0.40 0.50 0.60 0.70 0.80 0.90
-#
-# Output files per dataset (named automatically):
-#   kg_sanitized_budget_05pct.tsv
-#   kg_sanitized_budget_10pct.tsv
-#   ...
-#   kg_sanitized_budget_90pct.tsv
-# ─────────────────────────────────────────────────────────────────
+
 
 # ── PATHS — edit these before running ────────────────────────────
 

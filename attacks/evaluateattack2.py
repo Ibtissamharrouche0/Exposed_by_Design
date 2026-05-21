@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Attack2 Evaluation (Open-world-ish pool) — Multi-tail Ground Truth
-Compute: Coverage(mean), Hits@K, MRR
-
-This script evaluates Attack2 pairwise scoring outputs against a sensitive (ground-truth) file
-that can have MULTIPLE tails per head.
+This script evaluates Attack2 pairwise scoring outputs.
 
 It supports two common score TSV formats:
 
@@ -18,18 +14,12 @@ FORMAT B ("summary" format from your earlier single-tail script):
 In this case, we can compute Hits@K/MRR ONLY for the single true_tail_id using rank_true.
 (For multi-tail GT, FORMAT B is not sufficient.)
 
-Ground truth file (sensitive):
-    head_id    rel_id    tail_id
-(no header, tab-separated)
 
 Coverage(mean) here means:
     fraction of heads for which at least one GT tail appears in the scored candidate set (pool) for that head.
 If you scored ALL tails in the pool (topk=0), coverage should be high.
 If you only saved topk (e.g., 200), coverage is "coverage within saved candidates".
 
-Outputs:
-  - prints metrics
-  - optionally writes a JSON metrics file
 
 Examples:
   # Long format (topk saved or full pool)

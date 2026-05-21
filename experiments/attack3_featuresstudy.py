@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """
 Attack3 Ablation - ULTRA-FAST with NetworkX + PyTorch GPU
 50K heads in 30-60 min (NO FAISS CRASHES!)

@@ -1,9 +1,5 @@
-#!/usr/bin/env python3
-"""
-HealthKG Complete Extraction (NO FILTERING)
-Extracts ALL RDF data from RDF1-4.zip files to TSV format.
-NO meta-relation filtering, NO anonymization, EVERYTHING is kept.
 
+"""
 Prerequisites:
     pip install rdflib
 
@@ -20,7 +16,7 @@ import shutil
 from pathlib import Path
 from collections import Counter
 
-# Relations that indicate the head entity is a PERSON
+
 PERSON_RELATIONS = {
     'has_age_category',
     'has_gender',
@@ -190,7 +186,7 @@ def simplify_uri(uri):
     """Extract clean identifier from URI"""
     uri_str = str(uri)
     
-    # Remove common prefixes
+    
     prefixes = [
         'http://www.semanticweb.org/ontologies/',
         'http://example.org/',
@@ -202,7 +198,7 @@ def simplify_uri(uri):
     for prefix in prefixes:
         uri_str = uri_str.replace(prefix, '')
     
-    # Extract last part
+  
     if '#' in uri_str:
         return uri_str.split('#')[-1]
     elif '/' in uri_str:
@@ -261,14 +257,14 @@ def anonymize_persons(triples):
     
     print(f"   ✓ Found {len(person_entities):,} unique person entities")
     
-    # Step 2: Create anonymization mapping
+    
     person_mapping = {}
     for i, person in enumerate(sorted(person_entities), 1):
         person_mapping[person] = f"Person_{i:04d}"
     
     print(f"   ✓ Created anonymization mapping")
     
-    # Show samples
+   
     print(f"\n📝 Sample anonymization (first 5):")
     for i, (original, anonymized) in enumerate(list(person_mapping.items())[:5]):
         orig_display = original[:40] + '...' if len(original) > 40 else original
@@ -316,7 +312,7 @@ def export_to_tsv(triples, output_file, relation_counts):
     
     print(f"✅ Exported {len(triples):,} triples")
     
-    # Show top relations
+    
     print(f"\n🔝 Top 15 relations:")
     for i, (relation, count) in enumerate(relation_counts.most_common(15), 1):
         rel_display = relation[:45] + '...' if len(relation) > 45 else relation
@@ -365,7 +361,7 @@ def validate_output(output_file):
     print(f"   ├─ Unique relations: {len(relations):,}")
     print(f"   └─ Person entities: {person_entities:,} (anonymized)")
     
-    # Sample with persons
+   
     print(f"\n📝 Sample triples (with anonymized persons):")
     with open(output_file, 'r', encoding='utf-8') as f:
         count = 0
@@ -383,7 +379,7 @@ def validate_output(output_file):
     return True
 
 def main():
-    # Filter Jupyter kernel arguments
+   
     if is_running_in_notebook():
         import sys
         original_argv = sys.argv.copy()

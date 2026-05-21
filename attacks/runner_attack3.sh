@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 """
 Runner for Attack 3 - Structural kNN voting for link prediction
 Runs all datasets (NELL, FB15, HealthKG) with their respective sensitive relations.

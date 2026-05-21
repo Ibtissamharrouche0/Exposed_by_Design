@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 """
 Runner for Attack 2 - Pairwise tail inference from Attack 1 scores
 Runs all datasets (NELL, FB15, HealthKG) with their respective sensitive relations.

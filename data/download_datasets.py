@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-"""
-Knowledge Graph Dataset Downloader
-Downloads NELL-995 and FB15k-237 datasets for membership inference experiments.
-HealthKG requires manual preprocessing (see data/README.md).
-"""
-
 import os
 import argparse
 import urllib.request

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """
 Dataset Validation Script
 Validates the integrity and format of full_kg.tsv knowledge graph files.

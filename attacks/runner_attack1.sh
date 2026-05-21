@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 """
 Runner for Attack 1 - ni_head + Ri features
 Runs all datasets (NELL, FB15, HealthKG) across layers 1 and 2.
