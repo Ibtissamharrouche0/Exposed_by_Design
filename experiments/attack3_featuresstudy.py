@@ -1,9 +1,4 @@
 
-"""
-Attack3 Ablation - ULTRA-FAST with NetworkX + PyTorch GPU
-50K heads in 30-60 min (NO FAISS CRASHES!)
-"""
-
 import argparse, json, math, random
 from pathlib import Path
 from collections import defaultdict, Counter
