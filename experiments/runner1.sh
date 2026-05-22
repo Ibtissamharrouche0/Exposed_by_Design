@@ -45,7 +45,7 @@ PUBLIC_NELL="data/processed/NELL/global_kg_public_wo_sensitive.tsv"
 SENS_NELL="data/processed/NELL/sensitive/concept__teamplaysagainstteam.tsv"
 
 if [ ! -f "$PUBLIC_NELL" ]; then
-    echo "❌ Public graph not found: $PUBLIC_NELL"
+    echo " Public graph not found: $PUBLIC_NELL"
     echo "   Run: python scripts/split.py first"
     exit 1
 fi

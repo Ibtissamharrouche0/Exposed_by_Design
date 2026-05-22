@@ -354,7 +354,7 @@ def main():
 
     # Device
     if args.device == "cuda" and not torch.cuda.is_available():
-        print("⚠️  CUDA not available, falling back to CPU")
+        print(" CUDA not available, falling back to CPU")
         args.device = "cpu"
     device = args.device
     print(f"[+] Device: {device}" +

@@ -256,7 +256,7 @@ def main():
             all_data[dataset_name] = df
     
     if not all_data:
-        print("❌ No data found! Run phi_ultra_fast_DIAGNOSTIC.py first.")
+        print(" No data found! Run phi_ultra_fast_DIAGNOSTIC.py first.")
         return
     
     print(f"\n[+] Loaded {len(all_data)} datasets: {list(all_data.keys())}")

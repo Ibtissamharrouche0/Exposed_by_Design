@@ -443,7 +443,7 @@ def main():
     prefix = args.head_prefix.strip()
 
     # ----------------------------
-    # ✅ THREAT MODEL (CORRECTED)
+    # THREAT MODEL (CORRECTED)
     # Enumerate candidate heads FROM THE PUBLIC GRAPH ONLY.
     # The adversary has zero knowledge of the sensitive relations at this stage.
     # If head_prefix is provided, filter by prefix (e.g. HealthKG: "Person_").
@@ -752,7 +752,7 @@ def main():
     }
     (outdir / "run_config.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
 
-    print("\n✅ Done.")
+    print("\n Done.")
     print("  struct_csv        :", struct_csv)
     print("  reconstructed KG  :", pred_path)
     print("  metrics table     :", metrics_path)

@@ -311,7 +311,7 @@ def run_experiment(exp_name, feature_config, df_triples, neighbors,
                                                 neg_per_pos=neg_per_pos, rng_seed=seed)
     
     if len(y) < 100:
-        print(f"⚠️  Too few samples ({len(y)}), skipping")
+        print(f" Too few samples ({len(y)}), skipping")
         return None
     
     indices = np.arange(len(y))

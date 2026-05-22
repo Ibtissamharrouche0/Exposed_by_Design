@@ -291,7 +291,7 @@ Workflow:
             print("\nℹ️  HealthKG not found (requires manual preprocessing)")
     else:
         if args.dataset == 'HealthKG':
-            print("\n⚠️  HealthKG already produces full_kg.tsv from preprocessing")
+            print("\n  HealthKG already produces full_kg.tsv from preprocessing")
             print("   No merging needed for HealthKG")
             return 0
         datasets = [args.dataset]

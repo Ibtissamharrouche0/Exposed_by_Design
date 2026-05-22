@@ -78,7 +78,7 @@ def validate_file(filepath, verbose=False):
     relations = defaultdict(int)
     
     try:
-        print(f"\n   📄 Reading {filename}...")
+        print(f"\n    Reading {filename}...")
         with open(filepath, 'r', encoding='utf-8') as f:
             for i, line in enumerate(f, 1):
                 # Skip empty lines
@@ -124,14 +124,14 @@ def validate_dataset(dataset_name, data_dir='./raw', verbose=False):
     """Validate a complete dataset"""
     
     print(f"\n{'='*70}")
-    print(f"📋 Validating {dataset_name}")
+    print(f" Validating {dataset_name}")
     print('='*70)
     
     dataset_path = os.path.join(data_dir, dataset_name)
     
     # Check if directory exists
     if not os.path.exists(dataset_path):
-        print(f"❌ Dataset directory not found: {dataset_path}")
+        print(f" Dataset directory not found: {dataset_path}")
         print(f"   Run: python download_datasets.py --dataset {dataset_name}")
         return False
     
@@ -140,7 +140,7 @@ def validate_dataset(dataset_name, data_dir='./raw', verbose=False):
     
     # Check if file exists
     if not os.path.exists(filepath):
-        print(f"❌ File not found: {expected['file']}")
+        print(f" File not found: {expected['file']}")
         print(f"   Expected: {filepath}")
         print(f"   Run: python merge_kg_files.py --dataset {dataset_name}")
         return False
@@ -149,7 +149,7 @@ def validate_dataset(dataset_name, data_dir='./raw', verbose=False):
     valid, error, stats = validate_file(filepath, verbose)
     
     if not valid:
-        print(f"❌ Validation failed:")
+        print(f" Validation failed:")
         if isinstance(error, list):
             for err in error:
                 print(f"   - {err}")
@@ -158,25 +158,25 @@ def validate_dataset(dataset_name, data_dir='./raw', verbose=False):
         return False
     
     # Print statistics
-    print(f"\n   ✅ Format valid: tab-separated triples")
-    print(f"\n   📊 Statistics:")
+    print(f"\n    Format valid: tab-separated triples")
+    print(f"\n    Statistics:")
     print(f"      ├─ Total triples: {stats['num_triples']:,}")
     print(f"      ├─ Unique entities: {stats['num_entities']:,}")
     print(f"      ├─ Unique relations: {stats['num_relations']:,}")
     
     if stats['duplicates'] > 0:
-        print(f"      ⚠️  Duplicates found: {stats['duplicates']}")
+        print(f"        Duplicates found: {stats['duplicates']}")
     else:
         print(f"      └─ No duplicates ✓")
     
     # Check triple count is in expected range
     print(f"\n   🔍 Checking triple count...")
     if stats['num_triples'] < expected['min_triples']:
-        print(f"      ⚠️  Warning: Only {stats['num_triples']:,} triples")
+        print(f"        Warning: Only {stats['num_triples']:,} triples")
         print(f"         Expected at least {expected['min_triples']:,}")
         return False
     elif stats['num_triples'] > expected['max_triples']:
-        print(f"      ⚠️  Warning: {stats['num_triples']:,} triples")
+        print(f"        Warning: {stats['num_triples']:,} triples")
         print(f"         Expected at most {expected['max_triples']:,}")
         return False
     else:
@@ -184,14 +184,14 @@ def validate_dataset(dataset_name, data_dir='./raw', verbose=False):
     
     # Show top relations
     if verbose:
-        print(f"\n   🔝 Top 10 relations:")
+        print(f"\n    Top 10 relations:")
         sorted_relations = sorted(stats['relations_dist'].items(), key=lambda x: x[1], reverse=True)
         for i, (relation, count) in enumerate(sorted_relations[:10], 1):
             rel_display = relation[:60] + '...' if len(relation) > 60 else relation
             print(f"      {i:2d}. {rel_display:62s} : {count:>7,} triples")
     
     # Sample triples
-    print(f"\n   📝 Sample triples:")
+    print(f"\n    Sample triples:")
     with open(filepath, 'r', encoding='utf-8') as f:
         for i, line in enumerate(f):
             if i >= 3:
@@ -203,7 +203,7 @@ def validate_dataset(dataset_name, data_dir='./raw', verbose=False):
                 t = parts[2][:35] + '...' if len(parts[2]) > 35 else parts[2]
                 print(f"      {i+1}. {h:37s} | {r:37s} | {t:37s}")
     
-    print(f"\n   ✅ {dataset_name} validation PASSED")
+    print(f"\n    {dataset_name} validation PASSED")
     return True
 
 def check_nell_cleaning(data_dir='./raw'):
@@ -214,7 +214,7 @@ def check_nell_cleaning(data_dir='./raw'):
         return None
     
     print(f"\n{'='*70}")
-    print(f"🧹 Checking NELL URI Cleaning")
+    print(f" Checking NELL URI Cleaning")
     print('='*70)
     
     uri_count = 0
@@ -230,13 +230,13 @@ def check_nell_cleaning(data_dir='./raw'):
                 break
     
     if uri_count > 0:
-        print(f"   ⚠️  Found {uri_count} URIs in first {total_lines} lines")
-        print(f"   ⚠️  NELL data may not be properly cleaned")
-        print(f"   💡 Run: python merge_kg_files.py --dataset NELL")
+        print(f"     Found {uri_count} URIs in first {total_lines} lines")
+        print(f"     NELL data may not be properly cleaned")
+        print(f"    Run: python merge_kg_files.py --dataset NELL")
         return False
     else:
-        print(f"   ✅ No URIs found in sample of {total_lines} lines")
-        print(f"   ✅ NELL data is properly cleaned")
+        print(f"    No URIs found in sample of {total_lines} lines")
+        print(f"    NELL data is properly cleaned")
         return True
 
 def main():
@@ -307,7 +307,7 @@ What this validates:
         print("   Run: python download_datasets.py --all")
         sys.exit(1)
     
-    print(f"\n📁 Data directory: {os.path.abspath(args.data_dir)}")
+    print(f"\n Data directory: {os.path.abspath(args.data_dir)}")
     
     # Validate datasets
     if args.dataset:
@@ -326,29 +326,29 @@ What this validates:
     
     # Print final summary
     print("\n" + "="*70)
-    print("📊 VALIDATION SUMMARY")
+    print(" VALIDATION SUMMARY")
     print("="*70)
     
     for dataset, passed in results.items():
         if passed is None:
-            status = "⏭️  SKIPPED"
+            status = " SKIPPED"
         elif passed:
-            status = "✅ PASS"
+            status = " PASS"
         else:
-            status = "❌ FAIL"
+            status = " FAIL"
         print(f"{status} - {dataset}")
     
     print("="*70)
     
     # Exit code
     if all(v for v in results.values() if v is not None):
-        print("\n✅ All datasets validated successfully!")
-        print("\n📝 Next steps:")
+        print("\n All datasets validated successfully!")
+        print("\n Next steps:")
         print("   1. Split datasets: bash scripts/split_all_datasets.sh")
         print("   2. Or use: python scripts/split.py --global_path raw/NELL/full_kg.tsv ...")
         sys.exit(0)
     else:
-        print("\n❌ Some datasets failed validation")
+        print("\n Some datasets failed validation")
         print("   Please check the errors above")
         sys.exit(1)
 
