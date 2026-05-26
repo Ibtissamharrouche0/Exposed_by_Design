@@ -37,8 +37,8 @@ def create_combined_boxplots(all_data, outdir):
     features = [
         ('n1_h', 'OUT-degree', True),           # n¹ₕ (HEAD)
         ('R1_h', 'Relation Diversity', False),  # R¹ₕ (HEAD)
-        ('b1', 'Breadth Edges', True),          # b¹ (UNDIRECTED)
-        ('d1', 'Depth Edges', True)             # d¹ (UNDIRECTED)
+        ('b1', 'Breadth Edges', True),          # b¹ (total)
+        ('d1', 'Depth Edges', True)             # d¹ (total)
     ]
     
     colors = {
