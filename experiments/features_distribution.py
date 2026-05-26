@@ -26,7 +26,7 @@ def load_features(dataset_name, base_dir):
         df = pd.read_csv(csv_path)
         return df
     else:
-        print(f"  ⚠️  Not found: {csv_path}")
+        print(f"  Not found: {csv_path}")
         return None
 
 
